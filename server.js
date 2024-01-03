@@ -13,7 +13,8 @@ app.use(express.json());
 // const uri = 'mongodb://localhost:27017';
 
 //********** USE CONTAINER NAME WHEN BUILD WITH DOCKER!!!!!! ************//
-const uri = 'mongodb://db_container:27017';
+// const uri = 'mongodb://db_container:27017';
+const uri = 'mongodb+srv://tann:1234@cluster0.otvipw8.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose
     .connect(uri, {
