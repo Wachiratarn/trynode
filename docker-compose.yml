@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_db:/data/db
+
+  api:
+    build: .
+    container_name: nodejsserver
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      MONGODB_URI: mongodb://db_container:27017/userData
+      DB_NAME: userData
+    depends_on:
+      - mongo_db
+
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    ports:
+        - "80:80" 
+    depends_on:
+        - api
+
+volumes:
+  mongo_db: {}
